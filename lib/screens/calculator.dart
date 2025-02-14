@@ -25,7 +25,7 @@ class _CalculatorState extends State<Calculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: kCustomAppbar,
+      appBar: kCustomAppbar(context, false),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

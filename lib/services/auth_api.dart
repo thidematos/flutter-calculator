@@ -7,12 +7,12 @@ final instance = FirebaseAuth.instance;
 class AuthApi {
   AuthApi();
 
-  static Future<bool> createUser(email, password) async {
+  static createUser(email, password) async {
     try {
       final loginData = await instance.createUserWithEmailAndPassword(
           email: email, password: password);
 
-      return true;
+      return loginData;
     } on FirebaseAuthException catch (err) {
       print(err.code);
       return false;
@@ -29,5 +29,9 @@ class AuthApi {
       print(err.code);
       return false;
     }
+  }
+
+  static void logout() {
+    instance.signOut();
   }
 }

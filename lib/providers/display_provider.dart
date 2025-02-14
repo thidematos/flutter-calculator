@@ -1,3 +1,4 @@
+import 'package:calculator/services/cloud_store_api.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final operations = ['%', '÷', 'x', '-', '+', '='];
@@ -71,6 +72,9 @@ class DisplayNotifier extends StateNotifier {
         'buffer': buffer,
       };
       bool isEqualSign = operation == '=';
+      if (isEqualSign) {
+        CloudStoreApi.setHistory(state['value']);
+      }
       state = {
         ...state,
         'operation': isEqualSign ? null : operation,

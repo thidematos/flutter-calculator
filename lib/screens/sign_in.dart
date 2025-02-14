@@ -1,4 +1,5 @@
 import 'package:calculator/services/auth_api.dart';
+import 'package:calculator/services/cloud_store_api.dart';
 import 'package:calculator/themes/color_theme.dart';
 import 'package:calculator/themes/letter_theme.dart';
 import 'package:calculator/utils/error_handling.dart';
@@ -41,11 +42,16 @@ class _SignInState extends State<SignIn> {
       isLoading = true;
     });
 
-    final bool isSuccessfull = await AuthApi.createUser(email, password);
+    final isSuccessfull = await AuthApi.createUser(email, password);
 
-    if (!isSuccessfull) {
+    final isSuccessfullData =
+        await CloudStoreApi.setUserData(isSuccessfull.user!.uid, name);
+
+    if (isSuccessfull == false || !isSuccessfullData) {
       kShowErrorSnackBar(context, 'Error creating new user');
     }
+
+    Navigator.of(context).pop();
 
     setState(() {
       isLoading = false;
@@ -55,7 +61,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: kCustomAppbar,
+      appBar: kCustomAppbar(context, true),
       backgroundColor: ColorTheme.primaryBlue,
       body: Center(
         child: SingleChildScrollView(
