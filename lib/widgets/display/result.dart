@@ -9,17 +9,28 @@ class Result extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(DisplayProvider) as Map;
-    final display = state['display'];
-    final currentNumbers = state['currentNumbers'];
-    final buffer = num.tryParse(state['buffer'].join('')) ?? 0;
-    final operation = state['operation'] as String;
+    final state = ref.watch(DisplayProvider);
 
-    var result;
+    final result = 'oi';
 
-    switch (state['operation']) {
-      case '+':
-        result = currentNumbers.reduce((acc, item) => acc + item) + buffer;
+    final finalResult = 'oi';
+
+    Widget textContent = Text(
+      result,
+      style: LetterTheme.body.copyWith(
+        fontSize: 28,
+        color: ColorTheme.grey,
+      ),
+    );
+
+    if (finalResult.isNotEmpty) {
+      textContent = Text(
+        finalResult,
+        style: LetterTheme.body.copyWith(
+          fontSize: 28,
+          color: ColorTheme.black,
+        ),
+      );
     }
 
     return Row(
@@ -27,13 +38,7 @@ class Result extends ConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 16),
-          child: Text(
-            result == null ? '' : result.toString(),
-            style: LetterTheme.body.copyWith(
-              fontSize: 28,
-              color: ColorTheme.grey,
-            ),
-          ),
+          child: textContent,
         )
       ],
     );

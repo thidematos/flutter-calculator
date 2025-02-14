@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Display extends ConsumerWidget {
-  Display({super.key});
+  const Display({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final calcState = ref.watch(DisplayProvider)! as Map;
+    final display = ref.watch(DisplayProvider) as Map;
 
-    print(calcState);
-    final numToDisplay = calcState['display'].join('');
+    print(display);
 
     return Container(
       height: 100,
@@ -30,9 +29,9 @@ class Display extends ConsumerWidget {
               ),
             ),
             child: Text(
-              numToDisplay,
+              display['value'],
               style: LetterTheme.body.copyWith(
-                fontSize: 36,
+                fontSize: 72,
                 letterSpacing: 2,
               ),
             ),

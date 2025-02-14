@@ -35,15 +35,7 @@ class KeyButton extends ConsumerWidget {
         child: Center(
           child: TextButton(
             onPressed: () {
-              final isValid =
-                  ref.read(DisplayProvider.notifier).addToDisplay(keyLabel);
-
-              if (!isValid) {
-                kShowErrorSnackBar(
-                  context,
-                  'Não é possível inserir mais de 15 dígitos',
-                );
-              }
+              ref.read(DisplayProvider.notifier).pressButton(keyLabel);
             },
             child: Text(
               keyLabel,
