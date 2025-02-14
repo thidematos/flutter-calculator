@@ -7,13 +7,15 @@ final instance = FirebaseAuth.instance;
 class AuthApi {
   AuthApi();
 
-  static createUser(context, email, password) async {
+  static Future<bool> createUser(email, password) async {
     try {
       final loginData = await instance.createUserWithEmailAndPassword(
           email: email, password: password);
+
+      return true;
     } on FirebaseAuthException catch (err) {
       print(err.code);
-      kShowErrorSnackBar(context, 'Error: ${err.code}');
+      return false;
     }
   }
 }
