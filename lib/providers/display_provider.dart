@@ -62,6 +62,10 @@ class DisplayNotifier extends StateNotifier {
         'bufferIndex': 1,
       };
     } else {
+      bool isEqualSign = operation == '=';
+      if (isEqualSign) {
+        CloudStoreApi.setHistory(state['operation'], buffer, state['value']);
+      }
       buffer[0] = _calculate();
       buffer[1] = 0.0;
       state = {
@@ -71,10 +75,7 @@ class DisplayNotifier extends StateNotifier {
             : buffer[0].toString(),
         'buffer': buffer,
       };
-      bool isEqualSign = operation == '=';
-      if (isEqualSign) {
-        CloudStoreApi.setHistory(state['value']);
-      }
+
       state = {
         ...state,
         'operation': isEqualSign ? null : operation,

@@ -27,11 +27,13 @@ class CloudStoreApi {
     return data;
   }
 
-  static setHistory(value) async {
+  static setHistory(operation, buffer, value) async {
     final user = FirebaseAuth.instance.currentUser;
     await _cloudInstance.collection('history').add({
       'user': user!.uid,
       'value': value,
+      'buffer': buffer,
+      'operation': operation,
       'timestamp': DateTime.now().millisecondsSinceEpoch,
     });
   }

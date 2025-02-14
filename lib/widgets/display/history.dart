@@ -28,7 +28,7 @@ class History extends StatelessWidget {
 
           print(filteredData);
           return Container(
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             height: 600,
             width: double.infinity,
             child: Column(
@@ -65,11 +65,23 @@ class History extends StatelessWidget {
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 24),
-                      Text(
-                        item['value'],
-                        style: LetterTheme.body.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
+                      Expanded(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          spacing: 4,
+                          children: [
+                            Text(
+                              '${item['buffer'][0]} ${item['operation']} ${item['buffer'][1]} =',
+                              style: LetterTheme.body,
+                            ),
+                            Text(
+                              item['value'],
+                              style: LetterTheme.body.copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
+                            ),
+                          ],
                         ),
                       )
                     ],
