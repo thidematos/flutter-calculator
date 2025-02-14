@@ -18,4 +18,16 @@ class AuthApi {
       return false;
     }
   }
+
+  static Future<bool> login(email, password) async {
+    try {
+      final user = await instance.signInWithEmailAndPassword(
+          email: email, password: password);
+      print(user);
+      return true;
+    } on FirebaseAuthException catch (err) {
+      print(err.code);
+      return false;
+    }
+  }
 }

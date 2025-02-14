@@ -15,11 +15,11 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorTheme.primaryBlue,
-      body: Column(
-        spacing: 36,
-        mainAxisAlignment: MainAxisAlignment.center,
+      body: ListView(
         children: [
+          const SizedBox(height: 48),
           Logo(),
+          const SizedBox(height: 36),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 36),
             padding: EdgeInsets.symmetric(horizontal: 36, vertical: 24),
